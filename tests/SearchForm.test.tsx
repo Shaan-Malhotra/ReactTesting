@@ -3,6 +3,7 @@ import React from "react";
 import SearchForm from "../src/components/SearchForm";
 import fetchMock from 'jest-fetch-mock';
 import axios from 'axios';
+import '@testing-library/jest-dom';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -21,7 +22,7 @@ describe('SearchForm', () => {
     });
 
     test('fetches and displays movie data', async () => {
-        render(<SearchForm />);
+        render(<SearchForm onSearch={() => {}}/>);
 
         await waitFor(() => {
             expect(screen.getByText('Movie Information')).toBeInTheDocument();
