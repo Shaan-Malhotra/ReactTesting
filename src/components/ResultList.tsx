@@ -5,7 +5,6 @@ interface ResultListProps {
   results: Array<Movie>;
 }
 const ResultList: React.FC<ResultListProps> = ({ results }) => {
-    console.log(results[0])
   return (
     <div>
       {results.map((result) => (

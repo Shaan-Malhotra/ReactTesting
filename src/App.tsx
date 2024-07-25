@@ -10,15 +10,12 @@ const App: React.FC = () => {
 
   const handleSearch = async (query: string) => {
     let result = await getMovies(query);
-    console.log(result)
     setMovies(result);
-    console.log(movies)
   };
 
   const getMovies = (query:string) : any => {
     return axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&type=movie&s=${query}}&y`)
     .then((res) => {
-      console.log(res.data.Search)
       return res.data.Search;
   })
     .catch((error) => console.error(error))
