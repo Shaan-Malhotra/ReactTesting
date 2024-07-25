@@ -6,7 +6,7 @@ import ResultItem from "./components/ResultItem";
 import axios from "axios";
 import { Movie } from "./types/movie";
 
-const apiKey = import.meta.env.VITE_REACT_APP_API_KEY;
+const apiKey = process.env.VITE_REACT_APP_API_KEY;
 
 const App: React.FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
