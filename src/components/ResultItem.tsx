@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
-
+import { useParams } from "react-router-dom";
 import { MovieData } from "../types/movieData";
 
-interface ResultItemProps {
-  title: string;
-  year: string;
-}
-
-const ResultItem: React.FC<ResultItemProps> = ({ title, year }) => {
+const ResultItem: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
   const [movieData, setMovieData] = useState<MovieData | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const apiKey = import.meta.env.VITE_REACT_APP_API_KEY;
-  const movieUrl = `https://www.omdbapi.com/?apikey=${apiKey}&t=${title}&y=${year}`;
+  const movieUrl = `https://www.omdbapi.com/?apikey=${apiKey}&i=${id}`;
 
   useEffect(() => {
     const fetchMovieData = async () => {
+      setLoading(true);
       try {
         const response = await fetch(movieUrl);
         if (!response.ok) {
@@ -23,6 +21,8 @@ const ResultItem: React.FC<ResultItemProps> = ({ title, year }) => {
         setMovieData(data);
       } catch (error) {
         console.error("There was a problem with the fetch operation:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -30,17 +30,19 @@ const ResultItem: React.FC<ResultItemProps> = ({ title, year }) => {
   }, [movieUrl]);
 
   return (
-    <div>
-      {movieData ? (
+    <div className="movie-detail">
+      {loading ? (
+        <p>Loading...</p>
+      ) : movieData ? (
         <div>
           <h3>{movieData.Title}</h3>
           <p>{movieData.Plot}</p>
           <p>Released: {movieData.Released}</p>
           <p>Director: {movieData.Director}</p>
-          <img src={movieData.Poster} alt="Movie Poster" />
+          <img src={movieData.Poster} alt={`${movieData.Title} Poster`} />
         </div>
       ) : (
-        <p>Loading...</p>
+        <p>No data available</p>
       )}
     </div>
   );
