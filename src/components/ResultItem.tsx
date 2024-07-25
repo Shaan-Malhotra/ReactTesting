@@ -1,14 +1,18 @@
 import React from 'react';
+import PosterImg from './PosterImg';
 
 interface ResultItemProps {
-  result: { id: number; title: string; description: string };
+  result: {
+      year: string;
+      poster: string; id: number; title: string; description: string 
+};
 }
 
 const ResultItem: React.FC<ResultItemProps> = ({ result }) => {
   return (
     <div>
-      <h3>{result.title}</h3>
-      <p>{result.description}</p>
+      <PosterImg url={result.poster}> </PosterImg>
+      <h3>{result.title} ({result.year})</h3>
     </div>
   );
 };
