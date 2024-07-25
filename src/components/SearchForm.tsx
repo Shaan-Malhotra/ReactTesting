@@ -1,4 +1,5 @@
 import React, { useState, FormEvent } from 'react';
+import fetch from 'node-fetch';
 
 interface SearchFormProps {
   onSearch: (query: string) => void;
@@ -18,7 +19,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search..."
+        placeholder="Enter movie title"
       />
       <button type="submit">Search</button>
     </form>
