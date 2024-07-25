@@ -10,7 +10,7 @@ const SearchForm: React.FC = () => {
   }
 
   const [movieData, setMovieData] = useState<MovieData | null>(null);
-  const apiKey = import.meta.env.VITE_REACT_APP_API_KEY;
+  const apiKey = process.env.VITE_REACT_APP_API_KEY;
   const movieTitle = "Lion King";
   const movieUrl = `https://www.omdbapi.com/?apikey=${apiKey}&t=${movieTitle}`;
 
