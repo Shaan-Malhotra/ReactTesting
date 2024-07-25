@@ -2,6 +2,7 @@ import React from 'react';
 
 interface PosterImgProps {
   url: string;
+  children: any
 }
 
 const PosterImg: React.FC<PosterImgProps> = ({ url }) => {
