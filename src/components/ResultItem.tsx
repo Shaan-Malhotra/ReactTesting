@@ -6,7 +6,7 @@ const ResultItem: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [movieData, setMovieData] = useState<MovieData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const apiKey = import.meta.env.VITE_REACT_APP_API_KEY;
+  const apiKey = process.env.VITE_REACT_APP_API_KEY;
   const movieUrl = `https://www.omdbapi.com/?apikey=${apiKey}&i=${id}`;
 
   useEffect(() => {
