@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
 
 const SearchForm: React.FC = () => {
-  const [movieData, setMovieData] = useState(null);
+  interface MovieData {
+    Title: string;
+    Plot: string;
+    Released: string;
+    Director: string;
+    Poster: string;
+  }
+
+  const [movieData, setMovieData] = useState<MovieData | null>(null);
   const apiKey = import.meta.env.VITE_REACT_APP_API_KEY;
   const movieTitle = "Lion King";
   const movieUrl = `https://www.omdbapi.com/?apikey=${apiKey}&t=${movieTitle}`;
@@ -32,7 +40,7 @@ const SearchForm: React.FC = () => {
           <p>{movieData.Plot}</p>
           <p>Released: {movieData.Released}</p>
           <p>Director: {movieData.Director}</p>
-          {/* Add more movie details as needed */}
+          <img src={movieData.Poster} alt="Movie Poster" />
         </div>
       ) : (
         <p>Loading...</p>
