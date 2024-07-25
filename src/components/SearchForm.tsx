@@ -1,12 +1,11 @@
-import React, { useState, FormEvent } from 'react';
-import fetch from 'node-fetch';
+import React, { useState, FormEvent } from "react";
 
 interface SearchFormProps {
   onSearch: (query: string) => void;
 }
 
 const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -20,6 +19,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Enter movie title"
+        required
       />
       <button type="submit">Search</button>
     </form>
