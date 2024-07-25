@@ -25,7 +25,7 @@ const App: React.FC = () => {
     <div>
       <h1>Search App</h1>
       <SearchForm onSearch={handleSearch} />
-      <ResultList results={movies} />
+      <ResultList movies={movies} />
     </div>
   );
 };
