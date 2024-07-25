@@ -2,30 +2,33 @@ import React, { useState, useEffect } from 'react';
 import SearchForm from './components/SearchForm';
 import ResultList from './components/ResultList';
 import axios from 'axios';
+import { Movie } from './types/movie';
 const apiKey = import.meta.env.VITE_REACT_APP_API_KEY;
 
 const App: React.FC = () => {
-  const [results, setResults] = useState<Array<{ id: number; title: string; year: string, poster:string }>>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
 
   const handleSearch = async (query: string) => {
-    let movies = await getMovies(query);
-    setResults(movies);
+    let result = await getMovies(query);
+    console.log(result)
+    setMovies(result);
+    console.log(movies)
   };
 
-  const getMovies = (query:string) : any[] => {
-
-    axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&type=movie&s=${query}}&y`)
-    .then((res) => console.log(res.data))
+  const getMovies = (query:string) : any => {
+    return axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&type=movie&s=${query}}&y`)
+    .then((res) => {
+      console.log(res.data.Search)
+      return res.data.Search;
+  })
     .catch((error) => console.error(error))
-
-    return [];
   }
 
   return (
     <div>
       <h1>Search App</h1>
       <SearchForm onSearch={handleSearch} />
-      <ResultList results={results} />
+      <ResultList results={movies} />
     </div>
   );
 };

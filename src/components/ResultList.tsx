@@ -1,18 +1,21 @@
-import React from 'react';
-import ResultItem from './ResultItem';
-
+import React from "react";
+import ResultItem from "./ResultItem";
+import { Movie } from "../types/movie";
 interface ResultListProps {
-  results: Array<{ id: number; title: string; description: string; poster: string }>;
+  results: Array<Movie>;
 }
-
 const ResultList: React.FC<ResultListProps> = ({ results }) => {
+    console.log(results[0])
   return (
     <div>
       {results.map((result) => (
-        <ResultItem key={result.id} result={result} />
+        <ResultItem
+          key={result.imdbID}
+          year={result.Year}
+          title={result.Title}
+        />
       ))}
     </div>
   );
 };
-
 export default ResultList;
