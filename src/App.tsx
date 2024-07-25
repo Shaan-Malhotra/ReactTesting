@@ -13,12 +13,12 @@ const App: React.FC = () => {
     setMovies(result);
   };
 
-  const getMovies = (query:string) : any => {
+  const getMovies = (query: string): any => {
     return axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&type=movie&s=${query}}&y`)
-    .then((res) => {
-      return res.data.Search;
-  })
-    .catch((error) => console.error(error))
+      .then((res) => {
+        return res.data.Search;
+      })
+      .catch((error) => console.error(error))
   }
 
   return (
