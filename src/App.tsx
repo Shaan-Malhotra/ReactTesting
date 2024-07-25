@@ -1,37 +1,33 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import SearchForm from "./components/SearchForm";
+import React, { useState, useEffect } from 'react';
+import SearchForm from './components/SearchForm';
+import ResultList from './components/ResultList';
+import axios from 'axios';
+import { Movie } from './types/movie';
+const apiKey = import.meta.env.VITE_REACT_APP_API_KEY;
 
-function App() {
-  const [count, setCount] = useState(0);
+const App: React.FC = () => {
+  const [movies, setMovies] = useState<Movie[]>([]);
+
+  const handleSearch = async (query: string) => {
+    let result = await getMovies(query);
+    setMovies(result);
+  };
+
+  const getMovies = (query: string): any => {
+    return axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&type=movie&s=${query}}&y`)
+      .then((res) => {
+        return res.data.Search;
+      })
+      .catch((error) => console.error(error))
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <SearchForm />
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <h1>Search App</h1>
+      <SearchForm onSearch={handleSearch} />
+      <ResultList results={movies} />
+    </div>
   );
-}
+};
 
 export default App;
