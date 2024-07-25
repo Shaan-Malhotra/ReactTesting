@@ -19,6 +19,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Enter movie title"
+        required
       />
       <button type="submit">Search</button>
     </form>
