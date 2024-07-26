@@ -38,11 +38,17 @@ const ResultItem: React.FC = () => {
           <div>
             <h3>{movieData.Title}</h3>
             <p>{movieData.Plot}</p>
-            <p>Released: {movieData.Released}</p>
-            <p>Director: {movieData.Director}</p>
+            {movieData.Released ? <p>Released: {movieData.Released}</p> : null}
+            {movieData.Director ? <p>Director: {movieData.Director}</p> : null}
           </div>
           <div>
-            <img src={movieData.Poster} alt={`${movieData.Title} Poster`} />
+            <img
+              style={{ width: "50%" }}
+              src={
+                movieData.Poster ? movieData.Poster : "../images/notfound.png"
+              }
+              alt={`${movieData.Title} Poster`}
+            />
           </div>
         </div>
       ) : (
