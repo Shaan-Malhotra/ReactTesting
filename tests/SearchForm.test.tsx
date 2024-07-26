@@ -34,5 +34,16 @@ describe('SearchForm', () => {
         expect(mockOnSearch).toHaveBeenCalledWith('The Lion King');
 
     });
+
+    test("form is not submitted when input is empty due to the required field", () => {
+        const mockOnSearch = jest.fn();
+        render(<SearchForm onSearch={() => {}} />);
+        
+        const submitButton = screen.getByText("Search");
+    
+        fireEvent.click(submitButton);
+
+        expect(mockOnSearch).not.toHaveBeenCalled();
+      });
 });
 
