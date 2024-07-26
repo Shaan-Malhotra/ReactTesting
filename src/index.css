@@ -12,6 +12,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.card{
+  margin: auto;
+}
+
 a {
   font-weight: 500;
   color: white;
