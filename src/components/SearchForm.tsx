@@ -13,7 +13,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="content" onSubmit={handleSubmit}>
       <input
         type="text"
         value={query}

@@ -30,16 +30,20 @@ const ResultItem: React.FC = () => {
   }, [movieUrl]);
 
   return (
-    <div className="movie-detail">
+    <div className="content container">
       {loading ? (
         <p>Loading...</p>
       ) : movieData ? (
         <div>
-          <h3>{movieData.Title}</h3>
-          <p>{movieData.Plot}</p>
-          <p>Released: {movieData.Released}</p>
-          <p>Director: {movieData.Director}</p>
-          <img src={movieData.Poster} alt={`${movieData.Title} Poster`} />
+          <div>
+            <h3>{movieData.Title}</h3>
+            <p>{movieData.Plot}</p>
+            <p>Released: {movieData.Released}</p>
+            <p>Director: {movieData.Director}</p>
+          </div>
+          <div>
+            <img src={movieData.Poster} alt={`${movieData.Title} Poster`} />
+          </div>
         </div>
       ) : (
         <p>No data available</p>

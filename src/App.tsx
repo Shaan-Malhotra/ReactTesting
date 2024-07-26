@@ -28,8 +28,8 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <div>
-        <h1>Search App</h1>
+      <div className="container">
+        <h1 className="content">Search App</h1>
         <Routes>
           <Route
             path="/"
