@@ -8,7 +8,7 @@ interface ResultListProps {
 
 const ResultList: React.FC<ResultListProps> = ({ movies }) => {
   return (
-    <div className="result-list">
+    <div className="result-list content" id="result-list">
       {movies.map((movie) => (
         <div key={movie.imdbID} className="card" style={{ width: "18rem" }}>
           <Link to={`/movie/${movie.imdbID}`}>
