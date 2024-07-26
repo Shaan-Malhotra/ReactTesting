@@ -21,17 +21,28 @@ describe('Result List behaves properly', () => {
             Year: '2005-12-09',
             Poster: 'https://m.media-amazon.com/images/M/MV5BMTc0NTUwMTU5OV5BMl5BanBnXkFtZTcwNjAwNzQzMw@@._V1_SX300.jpg'
         },
-
     ];
+
+    const emptyMovieData: Movie[] = [];
 
     test('Renders the right amount of movies properly', async () => {
         const { container } = render(
             <MemoryRouter>
                 <ResultList movies={mockMovieData} />
             </MemoryRouter>)
-
         await waitFor(() => {
             expect(container.getElementsByClassName('card').length).toEqual(2)
+        })
+    })
+
+    test('Should render nothing if given an empty list', async () => {
+        const { container } = render(
+            <MemoryRouter>
+                <ResultList movies = {emptyMovieData} />
+            </MemoryRouter>
+        )
+        await waitFor(() => {
+            expect(container.getElementsByClassName('card').length).toEqual(0);
         })
     })
 })
