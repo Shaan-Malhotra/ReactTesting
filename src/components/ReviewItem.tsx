@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import { thirdPartyApiInstance } from "../../helpers/apiInstance";
+
 interface Review {
   reviewerName: string;
   reviewText: string;
@@ -19,14 +21,10 @@ const ReviewItem: React.FC = () => {
     title: string | undefined
   ): Promise<number> => {
     try {
-      const response = await fetch(
-        `http://localhost:5000/movies?title=${title}`
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      return data.length > 0 ? data[0].id : -1;
+      const response = await thirdPartyApiInstance.get(`/movies`, {
+        params: { title },
+      });
+      return response.data.length > 0 ? response.data[0].id : -1;
     } catch (error) {
       console.error("Failed to fetch movie id:", error);
       return -1;
@@ -35,13 +33,10 @@ const ReviewItem: React.FC = () => {
 
   const getReviewsByMovieId = async (movieId: number): Promise<Review[]> => {
     try {
-      const response = await fetch(
-        `http://localhost:5000/reviews?movieId=${movieId}`
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return await response.json();
+      const response = await thirdPartyApiInstance.get(`/reviews`, {
+        params: { movieId },
+      });
+      return response.data;
     } catch (error) {
       console.error("Failed to fetch reviews:", error);
       return [];
@@ -53,7 +48,6 @@ const ReviewItem: React.FC = () => {
       setLoading(true);
       try {
         const movieId = await getMovieIdByTitle(title);
-        console.log(title);
         if (movieId !== -1) {
           const reviews = await getReviewsByMovieId(movieId);
           // Set only the first review or null if no reviews are found

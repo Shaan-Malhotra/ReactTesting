@@ -2,7 +2,7 @@
   "reviews": [
     {
       "reviewerName": "Juan Jose Pinol",
-      "reviewText": "Amazing movie with a great storyline and fantastic visuals.",
+      "reviewText": "A mind-bending rollercoaster of epic proportions! It’s like riding a unicorn through a kaleidoscope – pure cinematic magic.",
       "rating": 5,
       "movieId": 1,
       "reviewDate": "2024-07-29",
@@ -10,7 +10,7 @@
     },
     {
       "reviewerName": "Tyler Byrd",
-      "reviewText": "Decent film, but the plot was a bit predictable.",
+      "reviewText": "Not bad, but the plot felt like a rerun of my grandma's old soap operas. You could predict the twist while making a sandwich.",
       "rating": 3,
       "movieId": 2,
       "reviewDate": "2024-07-28",
@@ -18,7 +18,7 @@
     },
     {
       "reviewerName": "Joanna McPherson",
-      "reviewText": "A thrilling and engaging film with excellent performances.",
+      "reviewText": "A high-octane thrill ride that’s like eating a bag of spicy popcorn while riding a rocket ship. Performances that’ll make you scream ‘Whoa!’",
       "rating": 4,
       "movieId": 3,
       "reviewDate": "2024-07-27",
@@ -26,7 +26,7 @@
     },
     {
       "reviewerName": "Shaan Malhotra",
-      "reviewText": "A heartwarming and emotional movie that will stay with you.",
+      "reviewText": "An emotional journey that’s like hugging a giant, cuddly teddy bear while riding through a waterfall of feels. It’ll leave your heart in a puddle!",
       "rating": 4,
       "movieId": 4,
       "reviewDate": "2024-07-26",
