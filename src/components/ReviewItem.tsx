@@ -11,11 +11,13 @@ interface Review {
 }
 
 const ReviewItem: React.FC = () => {
-  const { Title } = useParams<{ Title: string }>();
+  const { title } = useParams<{ title: string }>();
   const [reviewData, setReviewData] = useState<Review | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const getMovieIdByTitle = async (title: string): Promise<number> => {
+  const getMovieIdByTitle = async (
+    title: string | undefined
+  ): Promise<number> => {
     try {
       const response = await fetch(
         `http://localhost:5000/movies?title=${title}`
@@ -50,8 +52,8 @@ const ReviewItem: React.FC = () => {
     const fetchMovieData = async () => {
       setLoading(true);
       try {
-        const movieId = await getMovieIdByTitle(Title);
-        console.log(Title);
+        const movieId = await getMovieIdByTitle(title);
+        console.log(title);
         if (movieId !== -1) {
           const reviews = await getReviewsByMovieId(movieId);
           // Set only the first review or null if no reviews are found
@@ -69,7 +71,7 @@ const ReviewItem: React.FC = () => {
     };
 
     fetchMovieData();
-  }, [Title]);
+  }, [title]);
 
   return (
     <div className="content container">
@@ -77,7 +79,7 @@ const ReviewItem: React.FC = () => {
         <p>Loading...</p>
       ) : reviewData ? (
         <div>
-          <h3>{Title}</h3>
+          <h3>{title}</h3>
           <p>{reviewData.reviewText}</p>
           {reviewData.reviewDate && <p>Review Date: {reviewData.reviewDate}</p>}
           {reviewData.reviewerName && (
