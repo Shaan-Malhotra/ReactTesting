@@ -5,11 +5,13 @@ import ResultList from "./components/ResultList";
 import ResultItem from "./components/ResultItem";
 import axios from "axios";
 import { Movie } from "./types/movie";
+import ReviewItem from "./components/ReviewItem";
 
 const apiKey = process.env.VITE_REACT_APP_API_KEY;
 
 const App: React.FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [searched, setSearched] = useState(false);
 
   const handleSearch = async (query: string) => {
     const result = await getMovies(query);
@@ -35,12 +37,13 @@ const App: React.FC = () => {
             path="/"
             element={
               <>
-                <SearchForm onSearch={handleSearch} />
-                <ResultList movies={movies} />
+                <SearchForm onSearch={handleSearch} setSearched={setSearched} />
+                <ResultList movies={movies} searched={searched} />
               </>
             }
           />
           <Route path="/movie/:id" element={<ResultItem />} />
+          <Route path="/review/:title" element={<ReviewItem />} />
         </Routes>
       </div>
     </Router>
