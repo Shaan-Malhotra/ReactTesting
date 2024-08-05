@@ -6,6 +6,7 @@ import ResultItem from "./components/ResultItem";
 import axios from "axios";
 import { Movie } from "./types/movie";
 import ReviewItem from "./components/ReviewItem";
+import { Authenticator } from "@aws-amplify/ui-react";
 
 const apiKey = process.env.VITE_REACT_APP_API_KEY;
 
@@ -29,24 +30,28 @@ const App: React.FC = () => {
   };
 
   return (
-    <Router>
-      <div className="container">
-        <h1 className="content">Search App</h1>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <SearchForm onSearch={handleSearch} setSearched={setSearched} />
-                <ResultList movies={movies} searched={searched} />
-              </>
-            }
-          />
-          <Route path="/movie/:id" element={<ResultItem />} />
-          <Route path="/review/:title" element={<ReviewItem />} />
-        </Routes>
-      </div>
-    </Router>
+    <>
+      <Authenticator>
+        <Router>
+          <div className="container">
+            <h1 className="content">Search App</h1>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <SearchForm onSearch={handleSearch} setSearched={setSearched} />
+                    <ResultList movies={movies} searched={searched} />
+                  </>
+                }
+              />
+              <Route path="/movie/:id" element={<ResultItem />} />
+              <Route path="/review/:title" element={<ReviewItem />} />
+            </Routes>
+          </div>
+        </Router>
+      </Authenticator>
+    </>
   );
 };
 
