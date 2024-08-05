@@ -2,14 +2,16 @@ import React, { useState, FormEvent } from "react";
 
 interface SearchFormProps {
   onSearch: (query: string) => void;
+  setSearched: (query: boolean) => void;
 }
 
-const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
+const SearchForm: React.FC<SearchFormProps> = ({ onSearch, setSearched }) => {
   const [query, setQuery] = useState("");
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     onSearch(query);
+    setSearched(true);
   };
 
   return (

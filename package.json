@@ -11,7 +11,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "axios": "^1.7.2",
+    "@aws-amplify/ui-react": "^6.1.14",
+    "aws-amplify": "^6.4.3",
+    "axios": "^1.7.3",
     "dotenv": "^16.4.5",
     "node-fetch": "^3.3.2",
     "react": "^18.3.1",
