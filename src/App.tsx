@@ -7,6 +7,7 @@ import axios from "axios";
 import { Movie } from "./types/movie";
 import ReviewItem from "./components/ReviewItem";
 import { Authenticator } from "@aws-amplify/ui-react";
+import { getMovies } from "./services/moviesService";
 
 const apiKey = process.env.VITE_REACT_APP_API_KEY;
 
@@ -19,15 +20,15 @@ const App: React.FC = () => {
     setMovies(result);
   };
 
-  const getMovies = (query: string): Promise<Movie[]> => {
-    return axios
-      .get(`http://www.omdbapi.com/?apikey=${apiKey}&type=movie&s=${query}`)
-      .then((res) => res.data.Search)
-      .catch((error) => {
-        console.error(error);
-        return [];
-      });
-  };
+  // const getMovies = (query: string): Promise<Movie[]> => {
+  //   return axios
+  //     .get(`http://www.omdbapi.com/?apikey=${apiKey}&type=movie&s=${query}`)
+  //     .then((res) => res.data.Search)
+  //     .catch((error) => {
+  //       console.error(error);
+  //       return [];
+  //     });
+  // };
 
   return (
     <>
