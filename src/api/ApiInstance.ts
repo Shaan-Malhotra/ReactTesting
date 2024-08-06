@@ -1,30 +1,36 @@
 import axios from "axios";
 import { fetchAuthSession } from "aws-amplify/auth";
+const apiKey = process.env.VITE_REACT_APP_API_KEY;
 
 const reviewApiInstance = axios.create({
-    baseURL: 'https://wgw6hvpuj7.execute-api.us-east-2.amazonaws.com' //insert API gateway URL
-})
+  baseURL: "https://wgw6hvpuj7.execute-api.us-east-2.amazonaws.com", //insert API gateway URL
+});
 
-reviewApiInstance.interceptors.request.use(async (config) => {
+reviewApiInstance.interceptors.request.use(
+  async (config) => {
     try {
       const session = await fetchAuthSession();
       const token = session.tokens?.idToken?.toString();
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
-      }
-      else{
-        console.log('No Token!')
+      } else {
+        console.log("No Token!");
       }
     } catch (error) {
-      console.error('Error fetching token', error);
+      console.error("Error fetching token", error);
     }
     return config;
-  }, (error) => {
+  },
+  (error) => {
     return Promise.reject(error);
-  });
+  }
+);
 
-  const omdbMovieApiInstance = axios.create({
-    baseURL: 'http://www.omdbapi.com/?apikey=${apiKey}'
+const omdbMovieApiInstance = axios.create({
+  baseURL: "http://www.omdbapi.com/",
+  params: {
+    apikey: apiKey,
+  },
 });
 
-export { reviewApiInstance, omdbMovieApiInstance }
+export { reviewApiInstance, omdbMovieApiInstance };
