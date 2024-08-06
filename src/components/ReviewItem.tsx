@@ -1,47 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { thirdPartyApiInstance } from "../../helpers/apiInstance";
-
-interface Review {
-  reviewerName: string;
-  reviewText: string;
-  rating: number;
-  movieId: number;
-  reviewDate: string;
-  id: number;
-}
+import { getMovieIdByTitle } from "../services/reviewsService";
+import { getReviewsByMovieId } from "../services/reviewsService";
+import { Review } from "../types/review";
 
 const ReviewItem: React.FC = () => {
   const { title } = useParams<{ title: string }>();
   const [reviewData, setReviewData] = useState<Review | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-
-  const getMovieIdByTitle = async (
-    title: string | undefined
-  ): Promise<number> => {
-    try {
-      const response = await thirdPartyApiInstance.get(`/movies`, {
-        params: { title },
-      });
-      return response.data.length > 0 ? response.data[0].id : -1;
-    } catch (error) {
-      console.error("Failed to fetch movie id:", error);
-      return -1;
-    }
-  };
-
-  const getReviewsByMovieId = async (movieId: number): Promise<Review[]> => {
-    try {
-      const response = await thirdPartyApiInstance.get(`/reviews`, {
-        params: { movieId },
-      });
-      return response.data;
-    } catch (error) {
-      console.error("Failed to fetch reviews:", error);
-      return [];
-    }
-  };
 
   useEffect(() => {
     const fetchMovieData = async () => {
