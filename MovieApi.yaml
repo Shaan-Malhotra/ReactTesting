@@ -1,0 +1,160 @@
+openapi: 3.0.0
+info:
+  version: "1.0"
+  title: MovieAPI
+servers:
+  - url: "http://localhost:3000"
+paths:
+  /api/Movie:
+    get:
+      summary: Your GET endpoint
+      operationId: get-api-Movie
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Movie"
+      servers:
+        - url: "http://localhost:3000"
+    post:
+      summary: Your POST endpoint
+      operationId: post-api-Movie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateMovieDTO"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Movie"
+      servers:
+        - url: "http://localhost:3000"
+  "/api/Movie/{id}":
+    get:
+      summary: Your GET endpoint
+      operationId: get-api-Movie-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Movie"
+      servers:
+        - url: "http://localhost:3000"
+    delete:
+      summary: Your DELETE endpoint
+      operationId: delete-api-Movie-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+      servers:
+        - url: "http://localhost:3000"
+    put:
+      summary: Your PUT endpoint
+      operationId: put-api-Movie-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateMovieDTO"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Movie"
+      servers:
+        - url: "http://localhost:3000"
+components:
+  schemas:
+    Movie:
+      type: object
+      title: Movie
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        genre:
+          type: string
+        releaseYear:
+          type: integer
+        description:
+          type: string
+        rating:
+          type: number
+          format: float
+        image:
+          type: string
+        director:
+          type: string
+        duration:
+          type: integer
+    CreateMovieDTO:
+      type: object
+      title: CreateMovieDTO
+      properties:
+        title:
+          type: string
+        genre:
+          type: string
+        releaseYear:
+          type: integer
+        description:
+          type: string
+        rating:
+          type: number
+          format: float
+        image:
+          type: string
+        director:
+          type: string
+        duration:
+          type: integer
+    UpdateMovieDTO:
+      type: object
+      title: UpdateMovieDTO
+      properties:
+        title:
+          type: string
+        genre:
+          type: string
+        releaseYear:
+          type: integer
+        description:
+          type: string
+        rating:
+          type: number
+          format: float
+        image:
+          type: string
+        director:
+          type: string
+        duration:
+          type: integer
