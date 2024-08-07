@@ -1,0 +1,24 @@
+name: Test AWS Role
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-aws-role:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials from AssumeRole
+        id: aws-creds
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: us-east-1  # Change to your desired AWS region
+
+      - name: List S3 buckets
+        run: aws s3 ls
