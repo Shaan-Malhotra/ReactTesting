@@ -15,10 +15,23 @@ jobs:
 
       - name: Configure AWS credentials from AssumeRole
         id: aws-creds
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          aws-region: us-east-1  # Change to your desired AWS region
+          aws-region: us-east-1  # Replace with your AWS region
 
-      - name: List S3 buckets
-        run: aws s3 ls
+      - name: Print environment variables
+        run: |
+          echo "Printing environment variables:"
+          env
+
+      - name: Debug AWS Credentials
+        run: |
+          echo "Running AWS CLI commands to debug credentials:"
+          aws sts get-caller-identity
+          aws s3 ls  # Replace with a relevant AWS CLI command to test access
+
+      - name: Test application
+        run: |
+          # Add your application-specific test commands here
+          echo "Testing application..."
